@@ -28,17 +28,22 @@ class EmployeesAddForm extends Component{
     return (
         <div className="app-add-form">
             <h3>Добавьте нового сотрудника</h3>
+              <label htmlFor="nameInput"></label> 
             <form
-                className="add-form d-flex"
+                className="add-form"
                 onSubmit={this.onSubmit}>
-               
-                <input type="text"
+                    {this.props.warningName !== '' ? <label htmlFor="nameInput" className="label label-name">{this.props.warningName}</label> : ''} 
+                    {this.props.warningSalary !== '' ? <label htmlFor="salaryInput" className="label label-salary">{this.props.warningSalary}</label> : ''} 
+                    <div className="d-flex">
+                    <input type="text"
+                    id="nameInput"
                     className="form-control new-post-label"
                     placeholder="Как его зовут?" 
                     onChange={this.onValueChange}
                     value={name}
                     name="name"/>
                 <input type="number"
+                    id="salaryInput"
                     className="form-control new-post-label"
                     placeholder="З/П в $?"
                     onChange={this.onValueChange}
@@ -48,6 +53,8 @@ class EmployeesAddForm extends Component{
                 <button type="submit"
                         className="btn btn-outline-light"
                         >Добавить</button>
+                    </div>
+             
             </form>
         </div>
     )
