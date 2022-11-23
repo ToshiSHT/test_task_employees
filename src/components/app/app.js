@@ -14,7 +14,8 @@ class App extends Component {
       data: [
         {name: "John Smith", salary: 800, increase : false, rise: true, id:1},
         {name: "Kristina Shetinina", salary: 950, increase : true, rise: false, id:2},
-        {name: "Viktor Komarov", salary: 1250, increase : false, rise: false, id:3}
+        {name: "Viktor Komarov", salary: 1250, increase : false, rise: false, id:3},
+        {name: "Peta Kormaro", salary: 1250, increase : false, rise: false, id:4}
      ],
      warningName: '',
      warningSalary: '',
@@ -113,7 +114,16 @@ class App extends Component {
 onFilterSelect = (filter) => {
     this.setState({filter});
 }
- 
+onChangeSalary = (id,newSalary) => {
+  this.setState(({data}) =>({
+    data:data.map(item => {
+      if (item.id === id) {
+        return {...item, "salary": newSalary}    
+      }
+      return item
+    })
+  }))
+} 
 
 render() {
   const {data,term,warningName,warningSalary,filter} = this.state;
@@ -136,6 +146,7 @@ render() {
         onDelete={this.deleteItem}
         onToggleProps={this.onToggleProps}
         onToggleRise={this.onToggleRise}
+        onChangeSalary={this.onChangeSalary}
         />
         <EmployeesAddForm
         onCreate={this.createItem}
